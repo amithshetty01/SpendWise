@@ -103,7 +103,7 @@ const AnalyticsManager = {
 
     if (this.chartMom) this.chartMom.destroy();
 
-    const isDark = settings.theme === 'dark';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)';
     const textColor = isDark ? '#94a3b8' : '#64748b';
 
@@ -174,7 +174,7 @@ const AnalyticsManager = {
 
     if (this.chartCatDoughnut) this.chartCatDoughnut.destroy();
 
-    const isDark = settings.theme === 'dark';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const textColor = isDark ? '#94a3b8' : '#64748b';
 
     const catTotals = {};
@@ -222,7 +222,7 @@ const AnalyticsManager = {
 
     if (this.chartDailyTrend) this.chartDailyTrend.destroy();
 
-    const isDark = settings.theme === 'dark';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)';
     const textColor = isDark ? '#94a3b8' : '#64748b';
 
@@ -268,7 +268,7 @@ const AnalyticsManager = {
 
     if (this.chartIncomeSources) this.chartIncomeSources.destroy();
 
-    const isDark = settings.theme === 'dark';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const textColor = isDark ? '#94a3b8' : '#64748b';
 
     const sourceTotals = {};

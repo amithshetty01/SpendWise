@@ -108,7 +108,6 @@ const DashboardManager = {
     document.getElementById('dash-avail-balance-sub').textContent = Utils.formatCurrency(totalAvailableBalance, settings.currency);
 
     // Render Sub-Sections
-    this.renderPaymentMethodsBreakdown(filteredTx, settings);
     this.renderIncomeSourcesBreakdown(filteredTx, categories, settings);
     this.renderExpenseCategoryChart(filteredTx, categories, settings);
     this.renderIncomeVsExpenseChart(filteredTx, settings);
@@ -243,7 +242,7 @@ const DashboardManager = {
     if (ctx) {
       if (this.chartIncomeSources) this.chartIncomeSources.destroy();
 
-      const isDark = settings.theme === 'dark';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       const textColor = isDark ? '#94a3b8' : '#64748b';
 
       this.chartIncomeSources = new Chart(ctx, {
@@ -294,7 +293,7 @@ const DashboardManager = {
 
     if (this.chartExpenseCategory) this.chartExpenseCategory.destroy();
 
-    const isDark = settings.theme === 'dark';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const textColor = isDark ? '#94a3b8' : '#64748b';
 
     const catTotals = {};
@@ -345,7 +344,7 @@ const DashboardManager = {
 
     if (this.chartIncomeVsExpense) this.chartIncomeVsExpense.destroy();
 
-    const isDark = settings.theme === 'dark';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)';
     const textColor = isDark ? '#94a3b8' : '#64748b';
 

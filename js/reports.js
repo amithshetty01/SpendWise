@@ -63,7 +63,7 @@ const ReportsManager = {
 
     if (this.chartCategoryBar) this.chartCategoryBar.destroy();
 
-    const isDark = settings.theme === 'dark';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)';
     const textColor = isDark ? '#94a3b8' : '#64748b';
 
@@ -116,7 +116,7 @@ const ReportsManager = {
 
     if (this.chartPaymentMethod) this.chartPaymentMethod.destroy();
 
-    const isDark = settings.theme === 'dark';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const textColor = isDark ? '#94a3b8' : '#64748b';
 
     const methodTotals = {};

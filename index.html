@@ -177,19 +177,6 @@
           </div>
         </div>
 
-        <!-- Payment Methods Breakdown Section: "How did I pay?" -->
-        <div class="dashboard-card card-full mb-4">
-          <div class="card-header">
-            <div>
-              <h3>Payment Methods — How did I pay?</h3>
-              <p class="card-subtitle">Spending breakdown by payment channel for the selected month</p>
-            </div>
-          </div>
-          <div class="payment-methods-grid" id="dash-payment-methods-container">
-            <!-- Dynamically populated payment method cards -->
-          </div>
-        </div>
-
         <!-- Dashboard Two-Column Grid -->
         <div class="dashboard-grid">
           <!-- Income Summary: "Where did my money come from?" -->
@@ -773,8 +760,9 @@
               <div class="form-group">
                 <label for="setting-theme">Color Theme</label>
                 <select id="setting-theme" class="select-input">
-                  <option value="dark">Dark Navy Mode (Recommended)</option>
                   <option value="light">Light Mode</option>
+                  <option value="dark">Dark Navy Mode</option>
+                  <option value="system">System Preference</option>
                 </select>
               </div>
 
@@ -1304,18 +1292,11 @@
     </a>
     <a href="#transactions" class="mobile-nav-item" data-view="transactions">
       <i data-lucide="arrow-left-right"></i>
-      <span>Txns</span>
+      <span>Transactions</span>
     </a>
-    <button class="mobile-fab-btn" id="mobile-fab-add-btn" aria-label="Quick Add Transaction">
-      <i data-lucide="plus"></i>
-    </button>
     <a href="#analytics" class="mobile-nav-item" data-view="analytics">
       <i data-lucide="pie-chart"></i>
       <span>Analytics</span>
-    </a>
-    <a href="#reports" class="mobile-nav-item" data-view="reports">
-      <i data-lucide="bar-chart-3"></i>
-      <span>Reports</span>
     </a>
     <a href="#budgets" class="mobile-nav-item" data-view="budgets">
       <i data-lucide="wallet-cards"></i>

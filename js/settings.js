@@ -30,16 +30,38 @@ const SettingsManager = {
     if (themeToggleBtn) {
       themeToggleBtn.addEventListener('click', () => {
         const settings = StorageManager.getSettings();
-        const newTheme = settings.theme === 'dark' ? 'light' : 'dark';
+        const currentTheme = settings.theme || 'light';
+        let newTheme = 'dark';
+        if (currentTheme === 'dark') newTheme = 'light';
+        else if (currentTheme === 'light') newTheme = 'system';
+        else newTheme = 'dark';
+
         settings.theme = newTheme;
         StorageManager.saveSettings(settings);
         this.applyTheme(newTheme);
+
         const themeSelect = document.getElementById('setting-theme');
         if (themeSelect) themeSelect.value = newTheme;
-        Utils.showToast(`Theme switched to ${newTheme} mode.`, 'info');
+        Utils.showToast(`Theme updated: ${newTheme}.`, 'info');
+        App.refreshAllViews();
+      });
+    }
+
+    // Direct change on theme select in settings
+    const themeSelect = document.getElementById('setting-theme');
+    if (themeSelect) {
+      themeSelect.addEventListener('change', (e) => {
+        const newTheme = e.target.value;
+        const settings = StorageManager.getSettings();
+        settings.theme = newTheme;
+        StorageManager.saveSettings(settings);
+        this.applyTheme(newTheme);
+        App.refreshAllViews();
       });
     }
   },
+
+  systemMediaListener: null,
 
   loadSettingsToForm() {
     const settings = StorageManager.getSettings();
@@ -61,7 +83,36 @@ const SettingsManager = {
   },
 
   applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
+    if (!theme) theme = 'light';
+    let resolvedTheme = theme;
+
+    if (theme === 'system') {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      resolvedTheme = prefersDark ? 'dark' : 'light';
+
+      if (!this.systemMediaListener && window.matchMedia) {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        this.systemMediaListener = (e) => {
+          const currentSettings = StorageManager.getSettings();
+          if (currentSettings.theme === 'system') {
+            this.applyTheme('system');
+            App.refreshAllViews();
+          }
+        };
+        try {
+          mediaQuery.addEventListener('change', this.systemMediaListener);
+        } catch (e1) {
+          try { mediaQuery.addListener(this.systemMediaListener); } catch (e2) {}
+        }
+      }
+    }
+
+    document.documentElement.setAttribute('data-theme', resolvedTheme);
+
+    const themeSelect = document.getElementById('setting-theme');
+    if (themeSelect && themeSelect.value !== theme) {
+      themeSelect.value = theme;
+    }
   },
 
   savePreferences() {
@@ -74,6 +125,10 @@ const SettingsManager = {
     const newSettings = { currency, theme, dateFormat, dashboardRange };
     StorageManager.saveSettings(newSettings);
     StorageManager.saveOpeningBalance(openingBalance);
+
+    // Update global date range filter to match preference
+    const globalDateSelect = document.getElementById('global-date-range');
+    if (globalDateSelect) globalDateSelect.value = dashboardRange;
 
     this.applyTheme(theme);
     Utils.showToast('Settings & preferences saved successfully!', 'success');

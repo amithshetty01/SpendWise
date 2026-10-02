@@ -26,6 +26,16 @@ const App = {
     CalendarManager.init();
     SettingsManager.init();
 
+    // Load stored settings (theme & default range)
+    const settings = StorageManager.getSettings();
+    if (settings) {
+      SettingsManager.applyTheme(settings.theme || 'light');
+      const dateFilterSelect = document.getElementById('global-date-range');
+      if (dateFilterSelect && settings.dashboardRange) {
+        dateFilterSelect.value = settings.dashboardRange;
+      }
+    }
+
     // Handle hash navigation
     const initialHash = window.location.hash.replace('#', '') || 'dashboard';
     this.navigateTo(initialHash);
@@ -76,7 +86,7 @@ const App = {
   },
 
   bindGlobalEvents() {
-    // Mobile Sidebar Toggles
+    // Mobile Sidebar Toggles & Body Scroll Lock
     const openBtn = document.getElementById('mobile-toggle-btn');
     const closeBtn = document.getElementById('mobile-close-btn');
     const overlay = document.getElementById('sidebar-overlay');
@@ -85,7 +95,13 @@ const App = {
     const toggleSidebar = (show) => {
       if (sidebar) sidebar.classList.toggle('mobile-open', show);
       if (overlay) overlay.classList.toggle('active', show);
+      if (show) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
     };
+    this.toggleSidebar = toggleSidebar;
 
     if (openBtn) openBtn.addEventListener('click', () => toggleSidebar(true));
     if (closeBtn) closeBtn.addEventListener('click', () => toggleSidebar(false));
@@ -113,6 +129,9 @@ const App = {
         const viewTarget = item.getAttribute('data-view');
         if (viewTarget) {
           this.navigateTo(viewTarget);
+          if (this.toggleSidebar) {
+            this.toggleSidebar(false);
+          }
         }
       });
     });
