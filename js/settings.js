@@ -116,11 +116,12 @@ const SettingsManager = {
   },
 
   savePreferences() {
-    const currency = document.getElementById('setting-currency').value;
-    const theme = document.getElementById('setting-theme').value;
-    const dateFormat = document.getElementById('setting-date-format').value;
-    const dashboardRange = document.getElementById('setting-default-range').value;
-    const openingBalance = parseFloat(document.getElementById('setting-opening-balance')?.value) || 0;
+    const currentSettings = StorageManager.getSettings();
+    const currency = document.getElementById('setting-currency')?.value || currentSettings.currency || 'INR';
+    const theme = document.getElementById('setting-theme')?.value || currentSettings.theme || 'light';
+    const dateFormat = document.getElementById('setting-date-format')?.value || currentSettings.dateFormat || 'DD/MM/YYYY';
+    const dashboardRange = document.getElementById('setting-default-range')?.value || currentSettings.dashboardRange || 'this-month';
+    const openingBalance = parseFloat(document.getElementById('setting-opening-balance')?.value) || StorageManager.getOpeningBalance() || 0;
 
     const newSettings = { currency, theme, dateFormat, dashboardRange };
     StorageManager.saveSettings(newSettings);

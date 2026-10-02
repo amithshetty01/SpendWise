@@ -738,66 +738,6 @@
       <!-- VIEW 8: SETTINGS -->
       <section id="view-settings" class="app-view">
         <div class="settings-grid">
-          <!-- Application Preferences -->
-          <div class="dashboard-card">
-            <div class="card-header">
-              <h3><i data-lucide="sliders"></i> General Preferences</h3>
-            </div>
-            <div class="settings-form">
-              <div class="form-group">
-                <label for="setting-currency">Display Currency</label>
-                <select id="setting-currency" class="select-input">
-                  <option value="INR">Indian Rupee (₹ INR)</option>
-                  <option value="USD">US Dollar ($ USD)</option>
-                  <option value="EUR">Euro (€ EUR)</option>
-                  <option value="GBP">British Pound (£ GBP)</option>
-                  <option value="AED">UAE Dirham (AED)</option>
-                  <option value="CAD">Canadian Dollar ($ CAD)</option>
-                </select>
-                <span class="form-hint">Note: Changing currency updates display symbols. Amounts are not automatically converted using live exchange rates.</span>
-              </div>
-
-              <div class="form-group">
-                <label for="setting-theme">Color Theme</label>
-                <select id="setting-theme" class="select-input">
-                  <option value="light">Light Mode</option>
-                  <option value="dark">Dark Navy Mode</option>
-                  <option value="system">System Preference</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="setting-date-format">Date Format</label>
-                <select id="setting-date-format" class="select-input">
-                  <option value="DD/MM/YYYY">DD/MM/YYYY (e.g. 27/09/2026)</option>
-                  <option value="MM/DD/YYYY">MM/DD/YYYY (e.g. 09/27/2026)</option>
-                  <option value="YYYY-MM-DD">YYYY-MM-DD (e.g. 2026-09-27)</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="setting-opening-balance">Initial Opening Balance (₹)</label>
-                <input type="number" id="setting-opening-balance" class="form-input" placeholder="0.00" step="1">
-                <span class="form-hint">Used to calculate Total Available Account Balance (Opening Balance + Cumulative Income − Cumulative Expenses).</span>
-              </div>
-
-              <div class="form-group">
-                <label for="setting-default-range">Default Dashboard Date Range</label>
-                <select id="setting-default-range" class="select-input">
-                  <option value="this-month">This Month</option>
-                  <option value="this-week">This Week</option>
-                  <option value="last-month">Last Month</option>
-                  <option value="this-year">This Year</option>
-                  <option value="all-time">All Time</option>
-                </select>
-              </div>
-
-              <button class="btn btn-primary" id="save-settings-btn">
-                <i data-lucide="check"></i> Save Preferences
-              </button>
-            </div>
-          </div>
-
           <!-- Data Backup & Reset -->
           <div class="dashboard-card">
             <div class="card-header">
