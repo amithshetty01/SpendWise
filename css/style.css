@@ -940,27 +940,28 @@ button {
 }
 
 .search-box {
-  position: relative;
   display: flex;
   align-items: center;
+  gap: 8px;
   min-width: 180px;
   flex: 1;
+  width: 100%;
 }
 
 .search-box i {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-muted);
-  width: 16px;
-  height: 16px;
-  pointer-events: none;
-  z-index: 2;
+  position: static !important;
+  transform: none !important;
+  color: var(--text-primary);
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-left: 2px;
 }
 
 .search-box input {
-  padding-left: 38px !important;
+  flex: 1;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
   height: 38px;
   font-size: 13px;
   width: 100%;
