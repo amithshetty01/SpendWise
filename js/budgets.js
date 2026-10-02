@@ -118,15 +118,18 @@ const BudgetsManager = {
     // Render Budgets Grid
     const grid = document.getElementById('budgets-grid-container');
     const emptyState = document.getElementById('budgets-empty-state');
+    const emptyCard = document.getElementById('budgets-empty-card');
 
     const budgetCategoryIds = Object.keys(budgets);
 
     if (budgetCategoryIds.length === 0) {
       if (grid) grid.innerHTML = '';
+      if (emptyCard) emptyCard.style.display = 'block';
       if (emptyState) emptyState.style.display = 'flex';
       return;
     }
 
+    if (emptyCard) emptyCard.style.display = 'none';
     if (emptyState) emptyState.style.display = 'none';
 
     grid.innerHTML = budgetCategoryIds.map(catId => {

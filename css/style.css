@@ -342,16 +342,21 @@ button {
 .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  justify-content: flex-start;
 }
 
 .mobile-toggle-btn {
   display: none;
+  align-items: center;
+  justify-content: center;
   padding: 6px;
   border-radius: var(--radius-sm);
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
+  flex-shrink: 0;
+  margin: 0;
 }
 
 .header-title-wrapper h1 {
@@ -728,6 +733,18 @@ button {
   font-weight: 600;
   color: var(--text-primary);
   letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header h3 i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .card-subtitle {
@@ -924,24 +941,29 @@ button {
 
 .search-box {
   position: relative;
+  display: flex;
+  align-items: center;
   min-width: 180px;
   flex: 1;
 }
 
 .search-box i {
   position: absolute;
-  left: 10px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .search-box input {
-  padding-left: 30px;
-  height: 32px;
-  font-size: 12.5px;
+  padding-left: 38px !important;
+  height: 38px;
+  font-size: 13px;
+  width: 100%;
 }
 
 .filter-group {
@@ -1441,7 +1463,7 @@ button {
   color: var(--text-primary);
 }
 
-.form-input, .select-input {
+.form-input, .select-input, select {
   width: 100%;
   padding: 9px 12px;
   min-height: 40px;
@@ -1453,7 +1475,17 @@ button {
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.form-input:focus, .select-input:focus {
+select, .select-input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px !important;
+}
+
+.form-input:focus, .select-input:focus, select:focus {
   outline: none;
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 2px rgba(45, 120, 99, 0.25);
@@ -1800,6 +1832,21 @@ button {
 }
 
 /* Offline Status Badge */
+@keyframes green-glow-pulse {
+  0% {
+    box-shadow: 0 0 4px rgba(16, 185, 129, 0.6), 0 0 8px rgba(16, 185, 129, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 1), 0 0 16px rgba(16, 185, 129, 0.6);
+    transform: scale(1.18);
+  }
+  100% {
+    box-shadow: 0 0 4px rgba(16, 185, 129, 0.6), 0 0 8px rgba(16, 185, 129, 0.3);
+    transform: scale(1);
+  }
+}
+
 .offline-status-badge {
   display: inline-flex;
   align-items: center;
@@ -1814,9 +1861,9 @@ button {
 }
 
 .offline-status-badge.online {
-  background-color: rgba(45, 120, 99, 0.12);
-  color: #2d7863;
-  border: 1px solid rgba(45, 120, 99, 0.25);
+  background-color: rgba(16, 185, 129, 0.14);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.35);
 }
 
 .offline-status-badge.offline {
@@ -1832,8 +1879,9 @@ button {
 }
 
 .offline-status-badge.online .status-dot {
-  background-color: #2d7863;
-  box-shadow: 0 0 6px rgba(45, 120, 99, 0.6);
+  background-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  animation: green-glow-pulse 2s infinite ease-in-out;
 }
 
 .offline-status-badge.offline .status-dot {
@@ -2025,7 +2073,10 @@ button {
   }
 
   .header-left {
-    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
     width: 100%;
   }
 

@@ -269,7 +269,7 @@ const DashboardManager = {
     // Render Income List
     if (container) {
       if (Object.keys(sourceTotals).length === 0) {
-        container.innerHTML = '<p class="text-muted text-center py-2" style="font-size: 11.5px;">No income recorded for this period.</p>';
+        container.innerHTML = '';
       } else {
         container.innerHTML = Object.keys(sourceTotals).map((catId, idx) => {
           const cat = categories.find(c => c.id === catId) || { name: 'Other Income' };

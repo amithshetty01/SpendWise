@@ -163,6 +163,8 @@ const SettingsManager = {
 
       const confirmBtn = document.getElementById('confirm-btn-action');
       if (confirmBtn) {
+        confirmBtn.className = 'btn btn-primary';
+        confirmBtn.textContent = 'Restore Data';
         confirmBtn.onclick = () => {
           const result = StorageManager.importBackupJSON(event.target.result);
           Utils.closeModal('modal-confirm');
@@ -190,6 +192,8 @@ const SettingsManager = {
 
     const confirmBtn = document.getElementById('confirm-btn-action');
     if (confirmBtn) {
+      confirmBtn.className = 'btn btn-primary';
+      confirmBtn.textContent = 'Continue';
       confirmBtn.onclick = () => {
         const sampleTransactions = [
           { id: 'tx_s1', title: 'Monthly Salary Credit', amount: 125000, type: 'income', category: 'cat_sal', date: '2026-09-01', paymentMethod: 'Bank Transfer', notes: 'Monthly Tech Corp Salary', createdAt: '2026-09-01T09:00:00.000Z' },
@@ -242,6 +246,8 @@ const SettingsManager = {
 
     const confirmBtn = document.getElementById('confirm-btn-action');
     if (confirmBtn) {
+      confirmBtn.className = 'btn btn-danger';
+      confirmBtn.textContent = 'Clear All Data';
       confirmBtn.onclick = () => {
         StorageManager.clearAllData();
         Utils.showToast('All app data has been cleared.', 'info');
