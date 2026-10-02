@@ -113,6 +113,55 @@ const DashboardManager = {
     this.renderExpenseCategoryChart(filteredTx, categories, settings);
     this.renderIncomeVsExpenseChart(filteredTx, settings);
     this.renderHighlights(filteredTx, categories, settings);
+    this.renderRecentTransactions(filteredTx, categories, settings);
+  },
+
+  renderRecentTransactions(transactions, categories, settings) {
+    const listBody = document.getElementById('dash-recent-transactions-list');
+    const emptyState = document.getElementById('dash-recent-empty');
+    if (!listBody) return;
+
+    const recent = [...transactions].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+
+    if (recent.length === 0) {
+      listBody.innerHTML = '';
+      if (emptyState) emptyState.style.display = 'flex';
+      return;
+    }
+
+    if (emptyState) emptyState.style.display = 'none';
+
+    listBody.innerHTML = recent.map(tx => {
+      const cat = categories.find(c => c.id === tx.category) || { name: 'Uncategorized', icon: 'folder' };
+      const formattedAmount = `${tx.type === 'income' ? '+' : '-'}${Utils.formatCurrency(tx.amount, settings.currency)}`;
+
+      return `
+        <tr>
+          <td>
+            <div class="tx-title-wrapper">
+              <div class="tx-icon-badge ${tx.type}">
+                <i data-lucide="${cat.icon || 'circle-dollar-sign'}"></i>
+              </div>
+              <div>
+                <strong>${tx.title}</strong>
+                <div><span class="badge badge-${tx.type}">${tx.type}</span></div>
+              </div>
+            </div>
+          </td>
+          <td>${cat.name}</td>
+          <td>${Utils.formatDate(tx.date, settings.dateFormat)}</td>
+          <td><span class="badge badge-method">${tx.paymentMethod || 'Cash'}</span></td>
+          <td class="text-right amount-display ${tx.type}">${formattedAmount}</td>
+          <td class="text-center">
+            <button class="btn btn-icon btn-sm" onclick="TransactionsManager.viewTransactionDetails('${tx.id}')" title="View details">
+              <i data-lucide="eye"></i>
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    if (window.lucide) window.lucide.createIcons();
   },
 
   renderPaymentMethodsBreakdown(transactions, settings) {
